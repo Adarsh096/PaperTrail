@@ -1,0 +1,30 @@
+.gradio-container { width: calc(100vw - 24px) !important; max-width: 1200px !important; min-width: 0 !important; box-sizing: border-box; margin: auto; padding: 28px 28px 48px !important; }
+body { background: #f3f6fa; }
+#masthead { align-items: center; margin-bottom: 16px; }
+#masthead h1 { font-family: Georgia, serif; font-weight: 500; letter-spacing: -.035em; font-size: clamp(32px, 4vw, 46px); color: #142a47; margin: 0; }
+#masthead p { color: #516174; margin: 8px 0 0; font-size: 16px; }
+#theme-toggle { border-radius: 50%; width: 44px; height: 44px; font-size: 24px; }
+#intro { padding-bottom: 8px; color: #516174; }
+.small-note { font-size: 13px !important; color: #526276; line-height: 1.55; }
+#admission-usage { border: 2px solid #2563eb; border-left-width: 8px; border-radius: 12px; padding: 12px 18px; background: #eff6ff; color: #172554; font-size: 16px; }
+#admission-usage h3 { margin-top: 0; }
+#admission-usage-row { align-items: stretch; gap: 10px; margin-bottom: 12px; }
+#admission-info-button { align-self: flex-start; width: 38px; min-width: 38px; height: 38px; margin-top: 2px; border-radius: 50%; font-size: 19px; }
+#admission-info-dialog { width: min(440px, calc(100vw - 40px)); max-width: 440px; padding: 22px 26px; border: 1px solid #94a3b8; border-radius: 14px; background: #fff; color: #172554; box-shadow: 0 20px 70px #0f172a66; line-height: 1.6; }
+#admission-info-dialog::backdrop { background: #0f172a80; }
+#admission-info-dialog h2 { margin: 0 0 12px; font-size: 20px; }
+#admission-info-dialog [data-close] { float: right; border: 0; background: transparent; color: inherit; font-size: 24px; cursor: pointer; }
+.dark #admission-info-dialog { background: #111827; color: #eff6ff; }
+.dark #admission-usage { border-color: #60a5fa; background: #172554; color: #eff6ff; }
+.dark body, html.dark, .dark .gradio-container { background: #000 !important; color: #fff; }
+.dark #masthead h1 { color: #fff; }
+.dark #masthead p, .dark #intro, .dark .small-note { color: #cbd5e1; }
+.gradio-container textarea { line-height: 1.6 !important; }
+.gradio-container button:focus-visible { outline: 3px solid #3277cf; outline-offset: 3px; }
+@media (max-width: 700px) {
+  .gradio-container { padding: 16px 8px 32px !important; }
+  .gradio-container .column { min-width: 0 !important; flex-basis: 100% !important; }
+  #masthead { flex-wrap: nowrap !important; }
+  #masthead > div { min-width: 0 !important; }
+}
+@media (prefers-reduced-motion: reduce) { .gradio-container * { transition: none !important; animation: none !important; } }

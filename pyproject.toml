@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "papertrail-rag"
+version = "0.1.0"
+description = "Research paper retrieval with grounded, inspectable answers"
+requires-python = ">=3.12,<3.13"
+dependencies = ["pydantic==2.12.3", "qdrant-client==1.19.1"]
+
+[project.optional-dependencies]
+guardrails = ["laya==0.4.4", "sentencepiece==0.2.1", "transformers==5.19.0", "torch==2.10.0"]
+evaluation = ["ragas==0.4.3", "openai==2.28.0", "langchain-community==0.3.31", "langchain-openai==0.3.35"]
+embeddings = ["sentence-transformers==6.1.0", "transformers==5.19.0", "torch==2.10.0", "torchvision==0.25.0", "pillow==12.3.0"]
+gpu = ["sentence-transformers==6.1.0", "transformers==5.19.0", "torch==2.10.0", "torchvision==0.25.0", "pillow==12.3.0"]
+app = [
+    "gradio==6.30.0",
+    "groq==1.7.0",
+    "pypdf==6.20.1",
+    "httpx==0.28.1",
+]
+
+[tool.uv]
+conflicts = [[{extra = "embeddings"}, {extra = "gpu"}], [{extra = "guardrails"}, {extra = "gpu"}]]
+
+[project.scripts]
+paper-evidence = "paper_evidence_rag.cli:main"
+paper-evidence-app = "paper_evidence_rag.gradio_app:main"
+
+[dependency-groups]
+dev = ["pytest==8.4.2", "rank-bm25==0.2.2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = [{index = "pytorch-cpu", extra = "embeddings"}, {index = "pytorch-cpu", extra = "guardrails"}, {index = "pytorch-cu128", extra = "gpu"}]
+torchvision = [{index = "pytorch-cpu", extra = "embeddings"}, {index = "pytorch-cu128", extra = "gpu"}]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/paper_evidence_rag"]
